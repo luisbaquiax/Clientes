@@ -27,12 +27,12 @@ public class ServletCliente extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //List<Cliente> clientes = new ClienteDB().listarClientes();
-        ClienteDB cdb = new ClienteDB();
-        List<Cliente> clientes = cdb.listarClientes();
+//        ClienteDB cdb = new ClienteDB();
+//        List<Cliente> clientes = cdb.listarClientes();
 
-//        List<Cliente> clientes = new ArrayList<>();
-//        clientes.add(new Cliente(1, "cliente1", "apellido1", "email1", "654897", 4850.00));
-//        clientes.add(new Cliente(2, "cliente2", "apellido2", "email2", "654897", 4850.00));
+        List<Cliente> clientes = new ArrayList<>();
+        clientes.add(new Cliente(1, "cliente1", "apellido1", "email1", "654897", 4850.00));
+        clientes.add(new Cliente(2, "cliente2", "apellido2", "email2", "654897", 4850.00));
         request.setAttribute("clientes", clientes);
         request.getRequestDispatcher("/jsp/clientes.jsp").forward(request, response);
 
