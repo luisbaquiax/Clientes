@@ -5,7 +5,7 @@
  */
 package baquiax.controlclientes.clienteDB;
 
-import static baquiax.controlclientes.DB.Coneccion.*;
+import baquiax.controlclientes.DB.Coneccion;
 import baquiax.controlclientes.modelo.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,7 +43,7 @@ public class ClienteDB {
         List<Cliente> clientes = new ArrayList<>();
 
         try {
-            coneccion = getConnection();
+            coneccion = Coneccion.getConnection();
             preStatement = coneccion.prepareStatement(SELECT_CLIENTE);
             res = preStatement.executeQuery();
             while (res.next()) {
@@ -60,13 +60,9 @@ public class ClienteDB {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            try {
-                close(res);
-                close(preStatement);
-                close(coneccion);
-            } catch (SQLException ex) {
-                ex.printStackTrace(System.out);
-            }
+            Coneccion.close(res);
+            Coneccion.close(preStatement);
+            Coneccion.close(coneccion);
         }
 
         return clientes;
@@ -86,7 +82,7 @@ public class ClienteDB {
         Cliente cliente = null;
 
         try {
-            coneccion = getConnection();
+            coneccion = Coneccion.getConnection();
             preStatement = coneccion.prepareStatement(SELECT_BY_ID);
             preStatement.setInt(1, id);
             resulSet = preStatement.executeQuery();
@@ -101,13 +97,9 @@ public class ClienteDB {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            try {
-                close(resulSet);
-                close(preStatement);
-                close(coneccion);
-            } catch (SQLException ex) {
-                ex.printStackTrace(System.out);
-            }
+            Coneccion.close(resulSet);
+            Coneccion.close(preStatement);
+            Coneccion.close(coneccion);
         }
         return cliente;
     }
@@ -116,14 +108,14 @@ public class ClienteDB {
      * Insertar cliente en la BD
      *
      * @param cliente
-     * @return 
+     * @return
      */
     public int insertarCliente(Cliente cliente) {
         Connection coneccion = null;
         PreparedStatement preS = null;
         int registros = 0;
         try {
-            coneccion = getConnection();
+            coneccion = Coneccion.getConnection();
             preS = coneccion.prepareStatement(INSERTAR);
             preS.setString(1, cliente.getNombre());
             preS.setString(2, cliente.getApellido());
@@ -134,12 +126,8 @@ public class ClienteDB {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            try {
-                close(preS);
-                close(coneccion);
-            } catch (SQLException ex) {
-                ex.printStackTrace(System.out);
-            }
+            Coneccion.close(preS);
+            Coneccion.close(coneccion);
         }
         return registros;
     }
@@ -154,7 +142,7 @@ public class ClienteDB {
         PreparedStatement preS = null;
         //int registros = 0;
         try {
-            coneccion = getConnection();
+            coneccion = Coneccion.getConnection();
             preS = coneccion.prepareStatement(ACTUALIZAR);
             preS.setString(1, cliente.getNombre());
             preS.setString(2, cliente.getApellido());
@@ -167,12 +155,8 @@ public class ClienteDB {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            try {
-                close(preS);
-                close(coneccion);
-            } catch (SQLException ex) {
-                ex.printStackTrace(System.out);
-            }
+            Coneccion.close(preS);
+            Coneccion.close(coneccion);
         }
         //return registros;
     }
@@ -187,19 +171,15 @@ public class ClienteDB {
         PreparedStatement preS = null;
         //int registros = 0;
         try {
-            coneccion = getConnection();
+            coneccion = Coneccion.getConnection();
             preS = coneccion.prepareStatement(ELIMINAR);
             preS.setInt(1, cliente.getId());
             //registros = stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            try {
-                close(preS);
-                close(coneccion);
-            } catch (SQLException ex) {
-                ex.printStackTrace(System.out);
-            }
+            Coneccion.close(preS);
+            Coneccion.close(coneccion);
         }
 
     }

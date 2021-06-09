@@ -18,13 +18,16 @@ public class pruebaDB {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String[] args) {
-//        // TODO code application logic here
-//        ClienteDB cdb = new ClienteDB();
-//        List<Cliente> clientes = cdb.listarClientes();
-//        for (Cliente cliente : clientes) {
-//            System.out.println(cliente.toString());
-//        }
-//    }
-    
+    public static void main(String[] args) {
+        // TODO code application logic here
+
+        ClienteDB cdb = new ClienteDB();
+        List<Cliente> clientes = cdb.listarClientes();
+        for (Cliente cliente : clientes) {
+            System.out.println(cliente.toString());
+        }
+        //cdb.insertarCliente(new Cliente("Leonel", "Messi", "email5", "687979", 4546.00));
+
+    }
+
 }

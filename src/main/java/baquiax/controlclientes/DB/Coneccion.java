@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,27 +20,43 @@ import java.sql.Statement;
  */
 public class Coneccion {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/CLIENTES?useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3306/CLIENTES?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
     private static final String PASSWORD = "@luis.baquiax95";
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
-    
-    public static void close(ResultSet resulset) throws SQLException {
-        resulset.close();
+
+    public static void close(ResultSet resulset) {
+        try {
+            resulset.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Coneccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static void close(Statement statement) throws SQLException {
-        statement.close();
+    public static void close(Statement statement) {
+        try {
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Coneccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static void close(PreparedStatement preStement) throws SQLException {
-        preStement.close();
+    public static void close(PreparedStatement preStement) {
+        try {
+            preStement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Coneccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static void close(Connection coneccion) throws SQLException {
-        coneccion.close();
+    public static void close(Connection coneccion) {
+        try {
+            coneccion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Coneccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

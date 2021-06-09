@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Clientes</h1>
-        <a rel="" href="jsp/clientes.jsp">Control clientes</a>
+        <a rel="" href="${pageContext.request.contextPath}/controladorCliente">Control clientes</a>
     </body>
 </html>
 
