@@ -27,7 +27,8 @@ public class pruebaDB {
             System.out.println(cliente.toString());
         }
         //cdb.insertarCliente(new Cliente("Leonel", "Messi", "email5", "687979", 4546.00));
-
+        Cliente buscado = new Cliente(3);
+        System.out.println(cdb.buscarClienteID(1).toString());
+      
     }
-
 }

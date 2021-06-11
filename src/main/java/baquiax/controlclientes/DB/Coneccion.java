@@ -24,7 +24,8 @@ public class Coneccion {
     private static final String USER = "root";
     private static final String PASSWORD = "@luis.baquiax95";
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
@@ -58,5 +59,29 @@ public class Coneccion {
         } catch (SQLException ex) {
             Logger.getLogger(Coneccion.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private static Connection connection = null;
+    private static Coneccion connectionDB;
+
+    private Coneccion() {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            System.out.println("Error DB: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public static Connection getInstance() {
+        if (connectionDB == null) {
+            connectionDB = new Coneccion();
+        }
+        return connection;
     }
 }

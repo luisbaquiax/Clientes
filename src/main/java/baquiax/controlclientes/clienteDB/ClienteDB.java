@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,6 +45,7 @@ public class ClienteDB {
         List<Cliente> clientes = new ArrayList<>();
 
         try {
+            //coneccion = Coneccion.getInstance();
             coneccion = Coneccion.getConnection();
             preStatement = coneccion.prepareStatement(SELECT_CLIENTE);
             res = preStatement.executeQuery();
@@ -59,6 +62,8 @@ public class ClienteDB {
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(ClienteDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Coneccion.close(res);
             Coneccion.close(preStatement);
@@ -71,35 +76,38 @@ public class ClienteDB {
     /**
      * Seleccionar cliente por ID
      *
-     * @param id
+     * @param cliente
      * @return
      */
-    public Cliente selecionarClienteID(int id) {
-
-        Connection coneccion = null;
-        PreparedStatement preStatement = null;
-        ResultSet resulSet = null;
+    public Cliente buscarClienteID(int id) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Cliente cliente = null;
-
         try {
-            coneccion = Coneccion.getConnection();
-            preStatement = coneccion.prepareStatement(SELECT_BY_ID);
-            preStatement.setInt(1, id);
-            resulSet = preStatement.executeQuery();
-            resulSet.absolute(1);
+            conn = Coneccion.getConnection();
+            stmt = conn.prepareStatement(SELECT_BY_ID);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            //rs.absolute(1);//nos posicionamos en el primer registro devuelto
 
-            String nombre = resulSet.getString("nombre");
-            String apellido = resulSet.getString("apellido");
-            String email = resulSet.getString("email");
-            String telefono = resulSet.getString("telefono");
-            Double saldo = resulSet.getDouble("saldo");
-            cliente = new Cliente(id, nombre, apellido, email, telefono, saldo);
+            while (rs.next()) {
+                cliente = new Cliente(rs.getInt("ID"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido"),
+                        rs.getString("email"),
+                        rs.getString("telefono"),
+                        rs.getDouble("saldo"));
+            }
+
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(ClienteDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            Coneccion.close(resulSet);
-            Coneccion.close(preStatement);
-            Coneccion.close(coneccion);
+            Coneccion.close(rs);
+            Coneccion.close(stmt);
+            Coneccion.close(conn);
         }
         return cliente;
     }
@@ -125,6 +133,8 @@ public class ClienteDB {
             registros = preS.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(ClienteDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Coneccion.close(preS);
             Coneccion.close(coneccion);
@@ -140,7 +150,7 @@ public class ClienteDB {
     public void modificarCliente(Cliente cliente) {
         Connection coneccion = null;
         PreparedStatement preS = null;
-        //int registros = 0;
+        int registros = 0;
         try {
             coneccion = Coneccion.getConnection();
             preS = coneccion.prepareStatement(ACTUALIZAR);
@@ -151,9 +161,11 @@ public class ClienteDB {
             preS.setDouble(5, cliente.getSaldo());
 
             preS.setInt(6, cliente.getId());
-            //registros = stmt.executeUpdate();
+            registros = preS.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(ClienteDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Coneccion.close(preS);
             Coneccion.close(coneccion);
@@ -165,22 +177,26 @@ public class ClienteDB {
      * Eliminar cliente de DB
      *
      * @param cliente
+     * @return
      */
     public void eliminarCliente(Cliente cliente) {
         Connection coneccion = null;
         PreparedStatement preS = null;
-        //int registros = 0;
+        int registros = 0;
+
         try {
             coneccion = Coneccion.getConnection();
             preS = coneccion.prepareStatement(ELIMINAR);
             preS.setInt(1, cliente.getId());
-            //registros = stmt.executeUpdate();
+            registros = preS.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(ClienteDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Coneccion.close(preS);
             Coneccion.close(coneccion);
         }
-
+        //return registros;
     }
 }
