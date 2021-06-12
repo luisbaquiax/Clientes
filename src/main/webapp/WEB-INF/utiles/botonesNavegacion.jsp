@@ -14,6 +14,11 @@
                     <i class="fas fa-plus"></i> Agregar Cliente
                 </a>
             </div>
+            <div class="col-md-3">
+                <a href="index.jsp" class="btn btn-ligth btn-block">
+                    <i class="fas fa-arrow-left"></i> Salir
+                </a>
+            </div>
         </div>
     </div>
 </section>

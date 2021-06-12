@@ -45,7 +45,6 @@ public class ClienteDB {
         List<Cliente> clientes = new ArrayList<>();
 
         try {
-            //coneccion = Coneccion.getInstance();
             coneccion = Coneccion.getConnection();
             preStatement = coneccion.prepareStatement(SELECT_CLIENTE);
             res = preStatement.executeQuery();
@@ -76,7 +75,6 @@ public class ClienteDB {
     /**
      * Seleccionar cliente por ID
      *
-     * @param cliente
      * @return
      */
     public Cliente buscarClienteID(int id) {
@@ -177,7 +175,6 @@ public class ClienteDB {
      * Eliminar cliente de DB
      *
      * @param cliente
-     * @return
      */
     public void eliminarCliente(Cliente cliente) {
         Connection coneccion = null;

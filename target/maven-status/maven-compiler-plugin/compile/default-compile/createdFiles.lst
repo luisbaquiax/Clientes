@@ -1,5 +1,8 @@
 baquiax\controlclientes\clienteDB\ClienteDB.class
+baquiax\controlclientes\controlador\Login.class
+baquiax\controlclientes\clienteDB\pruebaDB.class
+baquiax\controlclientes\clienteDB\AdministradorDB.class
+baquiax\controlclientes\modelo\Administrador.class
 baquiax\controlclientes\controlador\ServletCliente.class
 baquiax\controlclientes\DB\Coneccion.class
-baquiax\controlclientes\clienteDB\pruebaDB.class
 baquiax\controlclientes\modelo\Cliente.class

@@ -5,7 +5,9 @@
  */
 package baquiax.controlclientes.clienteDB;
 
+import baquiax.controlclientes.modelo.Administrador;
 import baquiax.controlclientes.modelo.Cliente;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,15 +22,13 @@ public class pruebaDB {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        AdministradorDB adb = new AdministradorDB();
+        Administrador buscado = adb.buscarAdministrador("bien", "luis");
+        if (buscado != null) {
+            System.out.println(buscado.toString());
+        } else {
+            System.out.println("No se encontró el usuario");
 
-        ClienteDB cdb = new ClienteDB();
-        List<Cliente> clientes = cdb.listarClientes();
-        for (Cliente cliente : clientes) {
-            System.out.println(cliente.toString());
         }
-        //cdb.insertarCliente(new Cliente("Leonel", "Messi", "email5", "687979", 4546.00));
-        Cliente buscado = new Cliente(3);
-        System.out.println(cdb.buscarClienteID(1).toString());
-      
     }
 }

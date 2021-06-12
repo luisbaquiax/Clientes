@@ -8,7 +8,6 @@ package baquiax.controlclientes.controlador;
 import baquiax.controlclientes.clienteDB.ClienteDB;
 import baquiax.controlclientes.modelo.Cliente;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/controladorCliente")
 public class ServletCliente extends HttpServlet {
 
-    private ClienteDB clienteDB;
+    private final ClienteDB clienteDB;
 
     public ServletCliente() {
         this.clienteDB = new ClienteDB();
