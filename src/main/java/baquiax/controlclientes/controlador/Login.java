@@ -30,31 +30,28 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String usuario = request.getParameter("usuario");
-            String contra = request.getParameter("contra");
-            Administrador admin = null;
-            try {
-                admin = this.adminstradorDB.buscarAdministrador(contra, usuario);
-            } catch (Exception e) {
-                String error = "Contraseña o usuario incorrecto";
-                request.setAttribute("error", error);
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
-            }
-            if (admin != null) {
-                System.out.println(admin.toString());
-                HttpSession sesion = request.getSession();
-                sesion.setAttribute("admin", admin);
-                response.sendRedirect("controladorCliente");
-            } else {
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
-            }
-        } catch (IOException | ServletException e) {
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        }
+
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String usuario = request.getParameter("usuario");
+        String contra = request.getParameter("contra");
+        Administrador admin = null;
+        try {
+            admin = this.adminstradorDB.buscarAdministrador(contra, usuario);
+        } catch (Exception e) {
+            String error = "Contraseña o usuario incorrecto";
+            request.setAttribute("error", error);
+            response.sendRedirect("index.jsp");
+        }
+        if (admin != null) {
+            System.out.println(admin.toString());
+            HttpSession sesion = request.getSession();
+            sesion.setAttribute("admin", admin);
+            response.sendRedirect("controladorCliente");
+        } else {
+            response.sendRedirect("index.jsp");
+        }
     }
 }

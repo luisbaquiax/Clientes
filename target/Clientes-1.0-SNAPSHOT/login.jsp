@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="Login" method="GET">
+                        <form action="Login" method="POST">
                             <div class="input-group form-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
