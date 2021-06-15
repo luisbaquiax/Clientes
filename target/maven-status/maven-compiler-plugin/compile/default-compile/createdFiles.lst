@@ -1,4 +1,5 @@
 baquiax\controlclientes\clienteDB\ClienteDB.class
+baquiax\controlclientes\controlador\Salir.class
 baquiax\controlclientes\controlador\Login.class
 baquiax\controlclientes\clienteDB\pruebaDB.class
 baquiax\controlclientes\clienteDB\AdministradorDB.class
