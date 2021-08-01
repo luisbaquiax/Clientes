@@ -22,7 +22,7 @@ public class Coneccion {
 
     private static final String URL = "jdbc:mysql://localhost:3306/CLIENTES?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
-    private static final String PASSWORD = "@luis.baquiax95";
+    private static final String PASSWORD = "@luis.baquiax95";//@luis.baquiax95 luisbaquiax1234
 
     public static Connection getConnection() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
