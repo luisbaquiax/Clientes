@@ -40,18 +40,21 @@ public class Login extends HttpServlet {
         Administrador admin = null;
         try {
             admin = this.adminstradorDB.buscarAdministrador(contra, usuario);
+
+            if (admin != null) {
+                System.out.println(admin.toString());
+                HttpSession sesion = request.getSession();
+                sesion.setAttribute("admin", admin);
+                response.sendRedirect("controladorCliente");
+            } else {
+                String msg = "Contraseña o usuario incorrecto";
+                request.getSession().setAttribute("msg", msg);
+                response.sendRedirect("login.jsp");
+            }
         } catch (Exception e) {
-            String error = "Contraseña o usuario incorrecto";
-            request.setAttribute("error", error);
-            response.sendRedirect("index.jsp");
-        }
-        if (admin != null) {
-            System.out.println(admin.toString());
-            HttpSession sesion = request.getSession();
-            sesion.setAttribute("admin", admin);
-            response.sendRedirect("controladorCliente");
-        } else {
-            response.sendRedirect("index.jsp");
+            String msg = "Contraseña o usuario incorrecto";
+            request.getSession().setAttribute("msg", msg);
+            response.sendRedirect("login.jsp");
         }
     }
 }

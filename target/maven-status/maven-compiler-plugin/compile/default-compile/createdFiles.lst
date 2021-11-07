@@ -1,9 +1,11 @@
 baquiax/controlclientes/controlador/ServletCliente.class
-baquiax/controlclientes/clienteDB/AdministradorDB.class
 baquiax/controlclientes/clienteDB/pruebaDB.class
-baquiax/controlclientes/controlador/Salir.class
+baquiax/servicesReportes/ServicioReportes.class
+baquiax/controlclientes/clienteDB/AdministradorDB.class
+baquiax/controlclientes/controlador/reportes/ControladorReportes.class
 baquiax/controlclientes/DB/Coneccion.class
-baquiax/controlclientes/modelo/Cliente.class
+baquiax/controlclientes/controlador/Salir.class
 baquiax/controlclientes/clienteDB/ClienteDB.class
+baquiax/controlclientes/modelo/Cliente.class
 baquiax/controlclientes/modelo/Administrador.class
 baquiax/controlclientes/controlador/Login.class

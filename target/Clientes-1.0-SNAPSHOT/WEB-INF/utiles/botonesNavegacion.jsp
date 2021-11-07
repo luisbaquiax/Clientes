@@ -14,6 +14,16 @@
                     <i class="fas fa-plus"></i> Agregar Cliente
                 </a>
             </div>
+            <div class="col col-md-3">
+                <a href="${pageContext.request.contextPath}/ControladorReportes?reporte=1" class="btn btn-warning btn-block">
+                    <i class="fas fa-download"></i> Exportar lista de clientes con java beans
+                </a>
+            </div>
+            <div class="col col-md-3">
+                <a href="${pageContext.request.contextPath}/ControladorReportes?reporte=2" class="btn btn-warning btn-block">
+                    <i class="fas fa-download"></i> Exportar lista de clientes con coneccion
+                </a>
+            </div>
             <div class="col-md-3">
                 <a href="${pageContext.request.contextPath}/salir" class="btn btn-ligth btn-block">
                     <i class="fas fa-arrow-left"></i> Salir

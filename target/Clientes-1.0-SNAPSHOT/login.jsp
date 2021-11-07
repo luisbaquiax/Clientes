@@ -55,6 +55,9 @@
                             </div>
                         </form>
                     </div>
+                    <div class="card-footer">
+                        <h6 class="text-center text-danger">${msg}</h6>
+                    </div>
                 </div>
             </div>
         </div>

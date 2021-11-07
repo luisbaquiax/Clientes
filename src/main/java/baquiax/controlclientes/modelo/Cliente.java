@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package baquiax.controlclientes.modelo;
+
 /**
  *
  * @author Luis
@@ -16,6 +17,9 @@ public class Cliente {
     private String email;
     private String telefono;
     private Double saldo;
+
+    public Cliente() {
+    }
 
     /**
      * Para crear una cliente en la base de datos
